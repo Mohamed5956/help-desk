@@ -5,7 +5,7 @@ token authentication, and a React (Vite) single-page frontend.
 
 ## Stack
 
-- **Backend:** Laravel 11, Sanctum (token auth), MySQL
+- **Backend:** Laravel 13, Sanctum (token auth), MySQL
 - **Frontend:** React 18, Vite, React Router, Bootstrap
 - **Auth:** Bearer token (Sanctum's token guard, not the cookie/SPA guard —
   the two apps run on separate origins: `localhost:5173` and `localhost:8000`)
