@@ -16,6 +16,12 @@ class LoginUserAction
      */
     public function execute(array $credentials): array
     {
+        dd([
+            'env_host' => env('DB_HOST'),
+            'config_host' => config('database.connections.mysql.host'),
+            'env_database' => env('DB_DATABASE'),
+            'config_database' => config('database.connections.mysql.database'),
+        ]);
         if (! Auth::attempt($credentials)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
