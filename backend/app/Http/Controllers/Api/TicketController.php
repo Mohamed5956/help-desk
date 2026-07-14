@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Ticket\CreateTicketAction;
+use App\Actions\Ticket\DeleteTicketAction;
 use App\Actions\Ticket\ListTicketsAction;
 use App\Actions\Ticket\UpdateTicketStatusAction;
 use App\Http\Controllers\Controller;
@@ -53,5 +54,14 @@ class TicketController extends Controller
         $ticket = $action->execute($ticket, $request->validated('status'));
 
         return $this->success(new TicketResource($ticket), 'Ticket updated');
+    }
+
+    public function destroy(Ticket $ticket, DeleteTicketAction $action)
+    {
+        $this->authorize('delete', $ticket);
+
+        $action->execute($ticket);
+
+        return $this->success(null, 'Ticket deleted');
     }
 }

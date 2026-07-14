@@ -30,4 +30,9 @@ class TicketPolicy
     {
         return $user->isAdmin();
     }
+
+    public function delete(User $user, Ticket $ticket): bool
+    {
+        return $user->isAdmin();
+    }
 }

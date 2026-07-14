@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ReplyController;
 use App\Http\Controllers\Api\TicketController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -14,11 +15,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
 
     Route::apiResource('tickets', TicketController::class)
-        ->only(['index', 'store', 'show', 'update']);
+        ->only(['index', 'store', 'show', 'update', 'destroy']);
 
     Route::post('/tickets/{ticket}/replies', [ReplyController::class, 'store']);
 });
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::apiResource('users', UserController::class)
-        ->only(['index', 'store']);
+        ->only(['index', 'store', 'update','destroy']);
 });
